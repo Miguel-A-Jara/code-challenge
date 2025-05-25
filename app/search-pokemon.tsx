@@ -58,8 +58,8 @@ export default function SearchPokemon() {
             pokemonId={pokemonQuery.data.id}
             onPress={() => {
               router.navigate({
-                pathname: '/[pokemonId]',
-                params: { pokemonId: pokemonQuery.data.id },
+                pathname: '/[pokemonName]',
+                params: { pokemonName: pokemonQuery.data.name },
               })
             }}
           />

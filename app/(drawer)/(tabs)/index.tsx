@@ -90,8 +90,8 @@ export default function HomeDrawerTabs() {
                 pokemonId={item.id}
                 onPress={() => {
                   router.navigate({
-                    pathname: '/[pokemonId]',
-                    params: { pokemonId: item.id },
+                    pathname: '/[pokemonName]',
+                    params: { pokemonName: item.name },
                   })
                 }}
               />

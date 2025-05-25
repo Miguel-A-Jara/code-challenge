@@ -52,11 +52,18 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name='index' />
           <Stack.Screen name='(drawer)' options={{ headerShown: false }} />
-          <Stack.Screen name='[pokemonId]' options={{ headerShown: true }} />
+          <Stack.Screen
+            name='[pokemonName]'
+            options={{
+              headerShown: true,
+              headerBackButtonDisplayMode: 'minimal',
+            }}
+          />
           <Stack.Screen
             name='search-pokemon'
             options={{
               headerShown: true,
+              title: 'Buscar Pokémon',
               headerBackButtonDisplayMode: 'minimal',
             }}
           />
