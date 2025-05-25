@@ -1,18 +1,24 @@
 import { useFonts } from 'expo-font'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { useColorScheme } from 'react-native'
+import { cssInterop } from 'nativewind'
 import 'react-native-reanimated'
 
+import { NAVIGATION_THEME } from '@/constants/navigation-theme'
+import { useColorScheme } from '@/hooks/useColorScheme'
 import '@/styles.css'
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from '@react-navigation/native'
+import Icon from '@expo/vector-icons/MaterialIcons'
+import { ThemeProvider } from '@react-navigation/native'
+
+// NOTE: Sets up expo icons for nativewind (https://github.com/expo/vector-icons/issues/277)
+cssInterop(Icon, {
+  className: {
+    target: 'style',
+  },
+})
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme()
+  const { colorScheme } = useColorScheme()
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
@@ -23,12 +29,16 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <ThemeProvider
+      value={
+        colorScheme === 'dark' ? NAVIGATION_THEME.dark : NAVIGATION_THEME.light
+      }
+    >
+      <StatusBar style='auto' />
       <Stack>
         <Stack.Screen name='index' />
         <Stack.Screen name='(drawer)' options={{ headerShown: false }} />
       </Stack>
-      <StatusBar style='auto' />
     </ThemeProvider>
   )
 }
