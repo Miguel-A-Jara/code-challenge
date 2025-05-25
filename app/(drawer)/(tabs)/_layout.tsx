@@ -1,23 +1,24 @@
-import Icon from "@expo/vector-icons/MaterialIcons";
-import { Tabs } from "expo-router";
+import { Tabs } from 'expo-router'
+
+import Icon from '@expo/vector-icons/MaterialIcons'
 
 export default function HomeDrawerTabsLayout() {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
-          title: "Pokemones",
-          tabBarIcon: (props) => <Icon name="home" {...props} />,
+          title: 'Pokemones',
+          tabBarIcon: (props) => <Icon name='home' {...props} />,
         }}
       />
       <Tabs.Screen
-        name="favorites"
+        name='favorites'
         options={{
-          title: "Favoritos",
-          tabBarIcon: (props) => <Icon name="favorite" {...props} />,
+          title: 'Favoritos',
+          tabBarIcon: (props) => <Icon name='favorite' {...props} />,
         }}
       />
     </Tabs>
-  );
+  )
 }

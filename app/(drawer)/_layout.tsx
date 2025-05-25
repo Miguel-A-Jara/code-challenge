@@ -1,26 +1,27 @@
-import Icon from "@expo/vector-icons/MaterialIcons";
-import { Drawer } from "expo-router/drawer";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Drawer } from 'expo-router/drawer'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
+
+import Icon from '@expo/vector-icons/MaterialIcons'
 
 export default function HomeDrawerLayout() {
   return (
     <GestureHandlerRootView>
       <Drawer>
         <Drawer.Screen
-          name="(tabs)"
+          name='(tabs)'
           options={{
-            title: "PokeApp",
-            drawerIcon: (props) => <Icon name="home" {...props} />,
+            title: 'PokeApp',
+            drawerIcon: (props) => <Icon name='home' {...props} />,
           }}
         />
         <Drawer.Screen
-          name="settings"
+          name='settings'
           options={{
-            title: "Configuración",
-            drawerIcon: (props) => <Icon name="settings" {...props} />,
+            title: 'Configuración',
+            drawerIcon: (props) => <Icon name='settings' {...props} />,
           }}
         />
       </Drawer>
     </GestureHandlerRootView>
-  );
+  )
 }

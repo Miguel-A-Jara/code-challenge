@@ -1,5 +1,5 @@
-import { Text } from "react-native";
+import { Text } from 'react-native'
 
 export default function HomeDrawerTabs() {
-  return <Text>Index</Text>;
+  return <Text>Index</Text>
 }

@@ -1,5 +1,5 @@
-import { Text } from "react-native";
+import { Text } from 'react-native'
 
 export default function Favorites() {
-  return <Text>Favorites</Text>;
+  return <Text>Favorites</Text>
 }
