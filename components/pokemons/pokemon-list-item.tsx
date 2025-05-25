@@ -3,11 +3,11 @@ import { Pressable, View } from 'react-native'
 
 import loadingPokemon from '@/assets/images/loading-pokemon.gif'
 import { Separator } from '@/components/ui/separator'
-import { H3 } from '@/components/ui/typography'
+import { H3, P } from '@/components/ui/typography'
 
 interface PokemonListItemProps {
   title: string
-  pokemonId: string
+  pokemonId: number
 
   onPress: () => void
 }
@@ -43,7 +43,10 @@ export default function PokemonListItem({
         />
       </View>
 
-      <H3 className='capitalize'>{title}</H3>
+      <View>
+        <H3 className='capitalize'>{title}</H3>
+        <P>Pokemon #{pokemonId}</P>
+      </View>
       <Separator />
     </Pressable>
   )

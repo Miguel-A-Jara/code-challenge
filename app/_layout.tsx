@@ -1,4 +1,5 @@
 import { useFonts } from 'expo-font'
+import { Image } from 'expo-image'
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { cssInterop } from 'nativewind'
@@ -13,6 +14,13 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // NOTE: Sets up expo icons for nativewind (https://github.com/expo/vector-icons/issues/277)
 cssInterop(Icon, {
+  className: {
+    target: 'style',
+  },
+})
+
+// NOTE: Sets up expo image for nativewind
+cssInterop(Image, {
   className: {
     target: 'style',
   },
@@ -44,6 +52,14 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name='index' />
           <Stack.Screen name='(drawer)' options={{ headerShown: false }} />
+          <Stack.Screen name='[pokemonId]' options={{ headerShown: true }} />
+          <Stack.Screen
+            name='search-pokemon'
+            options={{
+              headerShown: true,
+              headerBackButtonDisplayMode: 'minimal',
+            }}
+          />
         </Stack>
       </ThemeProvider>
     </QueryClientProvider>
