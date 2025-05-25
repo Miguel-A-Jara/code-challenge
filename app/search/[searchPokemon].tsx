@@ -1,23 +1,33 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 
 import { HttpStatusCode, isAxiosError } from 'axios'
-import { useRouter } from 'expo-router'
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router'
 import { View } from 'react-native'
 
 import Container from '@/components/layout/container'
 import ErrorLayout from '@/components/layout/error-layout'
 import LoadingLayout from '@/components/layout/loading-layout'
 import PokemonListItem from '@/components/pokemons/pokemon-list-item'
-import { SearchInput } from '@/components/ui/search-input'
 import { Separator } from '@/components/ui/separator'
 import { H1, H3 } from '@/components/ui/typography'
 import useSearchPokemon from '@/hooks/pokemons/useSearchPokemon'
 
+type SearchPokemonProps = {
+  searchPokemon: string
+}
+
 export default function SearchPokemon() {
   const router = useRouter()
+  const navigation = useNavigation()
 
-  const [searchValue, setSearchValue] = useState('')
-  const pokemonQuery = useSearchPokemon(searchValue)
+  const { searchPokemon } = useLocalSearchParams<SearchPokemonProps>()
+  const pokemonQuery = useSearchPokemon(searchPokemon)
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: searchPokemon,
+    })
+  }, [navigation, searchPokemon])
 
   const isNotFound =
     pokemonQuery.isError &&
@@ -27,11 +37,6 @@ export default function SearchPokemon() {
   return (
     <Container>
       <View className='gap-4 flex-1'>
-        <SearchInput
-          onSearch={setSearchValue}
-          editable={!pokemonQuery.isLoading}
-        />
-
         {pokemonQuery.isLoading && <LoadingLayout />}
 
         {isNotFound && (

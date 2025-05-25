@@ -30,6 +30,7 @@ const queryClient = new QueryClient()
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme()
+
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   })
@@ -56,16 +57,12 @@ export default function RootLayout() {
             name='[pokemonName]'
             options={{
               headerShown: true,
-              headerTransparent: true,
-              headerBlurEffect: 'regular',
               headerBackButtonDisplayMode: 'minimal',
             }}
           />
           <Stack.Screen
-            name='search-pokemon'
+            name='search/[searchPokemon]'
             options={{
-              headerShown: true,
-              headerTransparent: true,
               title: 'Buscar Pokémon',
               headerBlurEffect: 'regular',
               headerBackButtonDisplayMode: 'minimal',
