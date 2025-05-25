@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar'
 import { useColorScheme } from 'react-native'
 import 'react-native-reanimated'
 
+import '@/styles.css'
 import {
   DarkTheme,
   DefaultTheme,
