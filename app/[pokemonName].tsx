@@ -1,7 +1,7 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 
 import { Image } from 'expo-image'
-import { useLocalSearchParams } from 'expo-router'
+import { useLocalSearchParams, useNavigation } from 'expo-router'
 import { ScrollView, View } from 'react-native'
 
 import Container from '@/components/layout/container'
@@ -21,8 +21,15 @@ type PokemonParams = {
 }
 
 export default function Pokemon() {
+  const navigation = useNavigation()
   const { pokemonName } = useLocalSearchParams<PokemonParams>()
   const pokemonQuery = useSearchPokemon(pokemonName)
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: pokemonName.toUpperCase(),
+    })
+  }, [navigation, pokemonName])
 
   const images = useMemo(() => {
     const isSuccess = pokemonQuery.isSuccess
@@ -68,7 +75,7 @@ export default function Pokemon() {
 
   if (pokemonQuery.isSuccess) {
     return (
-      <ScrollView>
+      <ScrollView bounces={false}>
         <Container>
           <View className='gap-8 flex-1'>
             <ScrollView
@@ -102,8 +109,8 @@ export default function Pokemon() {
             </View>
 
             <Separator />
-            <Accordion type='single' defaultValue={['item-1']}>
-              <AccordionItem value='item-1'>
+            <Accordion type='single'>
+              <AccordionItem value='movements'>
                 <AccordionTrigger>
                   <H3>Movimientos:</H3>
                 </AccordionTrigger>

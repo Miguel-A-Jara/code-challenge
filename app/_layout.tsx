@@ -56,6 +56,8 @@ export default function RootLayout() {
             name='[pokemonName]'
             options={{
               headerShown: true,
+              headerTransparent: true,
+              headerBlurEffect: 'regular',
               headerBackButtonDisplayMode: 'minimal',
             }}
           />
@@ -63,7 +65,9 @@ export default function RootLayout() {
             name='search-pokemon'
             options={{
               headerShown: true,
+              headerTransparent: true,
               title: 'Buscar Pokémon',
+              headerBlurEffect: 'regular',
               headerBackButtonDisplayMode: 'minimal',
             }}
           />

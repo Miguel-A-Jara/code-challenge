@@ -6,7 +6,6 @@ import {
   FlatList,
   NativeScrollEvent,
   NativeSyntheticEvent,
-  View,
 } from 'react-native'
 
 import Container from '@/components/layout/container'
@@ -19,7 +18,7 @@ import Icon from '@expo/vector-icons/MaterialIcons'
 
 const MIN_OFFSET_TO_DISPLAY_BUTTON = 500
 
-export default function HomeDrawerTabs() {
+export default function HomeDrawer() {
   const flatListRef = useRef<FlatList>(null)
 
   const router = useRouter()
@@ -74,50 +73,48 @@ export default function HomeDrawerTabs() {
   if (listPokemonQuery.isSuccess) {
     return (
       <Container>
-        <View>
-          <FlatList
-            scrollEnabled
-            ref={flatListRef}
-            onScroll={handleOnScroll}
-            onEndReachedThreshold={0.75}
-            keyExtractor={(item) => item.id}
-            onEndReached={handleNextPageFetch}
-            showsVerticalScrollIndicator={false}
-            data={listPokemonQuery.data.pokemons}
-            renderItem={({ item }) => (
-              <PokemonListItem
-                title={item.name}
-                pokemonId={item.id}
-                onPress={() => {
-                  router.navigate({
-                    pathname: '/[pokemonName]',
-                    params: { pokemonName: item.name },
-                  })
-                }}
-              />
-            )}
-          />
-
-          <Animated.View
-            style={{ opacity: opacityAnim }}
-            className='absolute right-0 bottom-0'
-          >
-            <Button
-              size='icon'
-              variant='outline'
-              className='w-20 h-20 rounded-3xl'
-              disabled={!hasScrolledDown}
+        <FlatList
+          scrollEnabled
+          ref={flatListRef}
+          onScroll={handleOnScroll}
+          onEndReachedThreshold={0.75}
+          keyExtractor={(item) => item.id}
+          onEndReached={handleNextPageFetch}
+          showsVerticalScrollIndicator={false}
+          data={listPokemonQuery.data.pokemons}
+          renderItem={({ item }) => (
+            <PokemonListItem
+              title={item.name}
+              pokemonId={item.id}
               onPress={() => {
-                flatListRef.current?.scrollToOffset({
-                  offset: 0,
-                  animated: true,
+                router.navigate({
+                  pathname: '/[pokemonName]',
+                  params: { pokemonName: item.name },
                 })
               }}
-            >
-              <Icon name='arrow-upward' size={24} className='color-primary' />
-            </Button>
-          </Animated.View>
-        </View>
+            />
+          )}
+        />
+
+        <Animated.View
+          style={{ opacity: opacityAnim }}
+          className='absolute right-0 bottom-0'
+        >
+          <Button
+            size='icon'
+            variant='outline'
+            className='w-20 h-20 rounded-3xl'
+            disabled={!hasScrolledDown}
+            onPress={() => {
+              flatListRef.current?.scrollToOffset({
+                offset: 0,
+                animated: true,
+              })
+            }}
+          >
+            <Icon name='arrow-upward' size={24} className='color-primary' />
+          </Button>
+        </Animated.View>
       </Container>
     )
   }

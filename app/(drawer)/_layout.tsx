@@ -12,7 +12,7 @@ export default function HomeDrawerLayout() {
     <GestureHandlerRootView>
       <Drawer>
         <Drawer.Screen
-          name='(tabs)'
+          name='index'
           options={{
             title: 'PokeApp',
             drawerIcon: (props) => <Icon name='home' {...props} />,
