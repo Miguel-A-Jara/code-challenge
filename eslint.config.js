@@ -2,6 +2,7 @@
 const { defineConfig } = require('eslint/config')
 const expoConfig = require('eslint-config-expo/flat')
 const noRelativeImports = require('eslint-plugin-no-relative-import-paths')
+const pluginQuery = require('@tanstack/eslint-plugin-query')
 
 module.exports = defineConfig([
   expoConfig,
@@ -17,6 +18,11 @@ module.exports = defineConfig([
         'warn',
         { prefix: '@', rootDir: './' },
       ],
+    },
+  },
+  {
+    plugins: {
+      '@tanstack/query': pluginQuery,
     },
   },
 ])

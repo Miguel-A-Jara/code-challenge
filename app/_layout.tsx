@@ -9,6 +9,7 @@ import { useColorScheme } from '@/hooks/useColorScheme'
 import '@/styles.css'
 import Icon from '@expo/vector-icons/MaterialIcons'
 import { ThemeProvider } from '@react-navigation/native'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 // NOTE: Sets up expo icons for nativewind (https://github.com/expo/vector-icons/issues/277)
 cssInterop(Icon, {
@@ -16,6 +17,8 @@ cssInterop(Icon, {
     target: 'style',
   },
 })
+
+const queryClient = new QueryClient()
 
 export default function RootLayout() {
   const { colorScheme } = useColorScheme()
@@ -29,16 +32,20 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider
-      value={
-        colorScheme === 'dark' ? NAVIGATION_THEME.dark : NAVIGATION_THEME.light
-      }
-    >
-      <StatusBar style='auto' />
-      <Stack>
-        <Stack.Screen name='index' />
-        <Stack.Screen name='(drawer)' options={{ headerShown: false }} />
-      </Stack>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider
+        value={
+          colorScheme === 'dark'
+            ? NAVIGATION_THEME.dark
+            : NAVIGATION_THEME.light
+        }
+      >
+        <StatusBar style='auto' />
+        <Stack>
+          <Stack.Screen name='index' />
+          <Stack.Screen name='(drawer)' options={{ headerShown: false }} />
+        </Stack>
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }
