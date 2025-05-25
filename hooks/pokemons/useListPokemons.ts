@@ -3,10 +3,14 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 
 export default function useListPokemons() {
   const listPokemonQuery = useInfiniteQuery({
-    queryKey: ['pokemons', 'list'],
-    queryFn: (ctx) =>
-      api.pokemons.listPokemons({ limit: 20, page: ctx.pageParam }),
     initialPageParam: 0,
+    queryKey: ['pokemons', 'list'],
+    queryFn: (ctx) => {
+      return api.pokemons.listPokemons(
+        { limit: 20, page: ctx.pageParam },
+        ctx.signal,
+      )
+    },
     getNextPageParam: (lastPage, _pages, lastPageParam) => {
       const { next } = lastPage.data
 
